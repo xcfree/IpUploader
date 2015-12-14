@@ -1,8 +1,6 @@
 __author__ = 'xcfree'
 
 import socket
-import fcntl
-import struct
 import urllib
 import platform
 
@@ -24,7 +22,8 @@ if __name__ == "__main__":
     sysstr = platform.system()
     #print sysstr
     if sysstr == "Windows":
-        print "Windows @ some ip"
+        ip_address = socket.gethostbyname(socket.gethostname())
+        print "Windows @ " + ip_address
     elif sysstr == "Linux":
         ip_address = getip()
         print "Linux @ " + ip_address
@@ -36,6 +35,6 @@ if __name__ == "__main__":
 
     f = urllib.urlopen("http://1.rpi2ip.sinaapp.com/upload_ip?ip=" + ip_address)
     if f.readline().lower() == 'ok':
-        print 'upload ip successful'
+        print 'successfully uploaded ip address'
     else:
-        print 'failed to upload ip'
+        print 'failed to upload ip address'
